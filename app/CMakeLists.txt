@@ -1,9 +1,5 @@
 cmake_minimum_required(VERSION 3.4.1)
 
-add_library( native-lib
-             SHARED
-             src/main/cpp/native-lib.cpp )
-
 #变量
 set(distribution_DIR ../../../../libs)
 
@@ -12,7 +8,11 @@ find_library( # Sets the name of the path variable.
               log )
 find_library( android-lib
                android)
-
+add_library( native-lib
+             SHARED
+             src/main/cpp/player.cpp
+             src/main/cpp/queue.h
+             src/main/cpp/native-lib.cpp )
 add_library( avutil-54
              SHARED
              IMPORTED)
@@ -61,12 +61,20 @@ add_library( postproc-53
 set_target_properties( postproc-53
                        PROPERTIES IMPORTED_LOCATION
                        ${distribution_DIR}/${ANDROID_ABI}/libpostproc-53.so)
+add_library( libyuv
+             SHARED
+             IMPORTED)
+set_target_properties( libyuv
+                       PROPERTIES IMPORTED_LOCATION
+                       ${distribution_DIR}/${ANDROID_ABI}/libyuv.so)
 
 #设置编译C的标准
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
 
-include_directories(libs/include/ffmpeg)
+
 include_directories(src/main/cpp)
+include_directories(libs/include/ffmpeg)
+include_directories(libs/include/libyuv)
 
 target_link_libraries( # Specifies the target library.
                        native-lib
@@ -78,5 +86,6 @@ target_link_libraries( # Specifies the target library.
                        avformat-56
                        avdevice-56
                        postproc-53
+                       libyuv
                        ${android-lib}
                        ${log-lib} )

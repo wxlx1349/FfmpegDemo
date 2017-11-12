@@ -15,6 +15,15 @@ extern "C" {
 JNIEXPORT void JNICALL Java_com_example_wangxi_ffmpegdemo_VideoUtils_decode
   (JNIEnv *, jclass, jstring, jstring);
 
+JNIEXPORT void JNICALL Java_com_example_wangxi_ffmpegdemo_VideoUtils_render
+        (JNIEnv *, jobject, jstring, jobject);
+
+JNIEXPORT void JNICALL Java_com_example_wangxi_ffmpegdemo_VideoUtils_sound
+        (JNIEnv *, jobject, jstring, jstring);
+
+JNIEXPORT void JNICALL Java_com_example_wangxi_ffmpegdemo_VideoUtils_play
+        (JNIEnv *, jobject, jstring, jobject);
+
 #ifdef __cplusplus
 }
 #endif

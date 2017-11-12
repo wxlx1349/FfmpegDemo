@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">FfmpegDemo</string>
+
+    <string-array name="video_list">
+        <item>1.mp4</item>
+        <item>4.avi</item>
+        <item>3.flv</item>
+        <item>a.mp3</item>
+    </string-array>
 </resources>
